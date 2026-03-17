@@ -15,6 +15,7 @@ export default function App() {
     const saved = localStorage.getItem("theme");
     return saved ? saved === "dark" : true;
   });
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
@@ -29,30 +30,39 @@ export default function App() {
 
   return (
     <PortfolioContext.Provider value={portfolioData}>
-      <Navbar className={`custom-navbar${scrolled ? " navbar--scrolled" : ""}`} fixed="top">
-        <Container fluid className="px-4">
+      <Navbar className={`custom-navbar${scrolled ? " navbar--scrolled" : ""}`} fixed="top" expand="md" expanded={navOpen} onToggle={setNavOpen}>
+        <Container fluid className="px-3 px-md-4">
           <Navbar.Brand
             className="navbar-name"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{ cursor: "pointer" }}
           >
             {portfolioData.name}
           </Navbar.Brand>
-          <Nav className="ms-auto align-items-center gap-1">
-            {NAV.map((n) => (
-              <Nav.Link key={n} href={`#${n.toLowerCase()}`} className="nav-link-custom">{n}</Nav.Link>
-            ))}
-            <button className="theme-toggle ms-2" onClick={() => setDark(!dark)} title={dark ? "Switch to Light" : "Switch to Dark"}>
+
+          <div className="d-flex align-items-center gap-2 ms-auto d-md-none">
+            <button className="theme-toggle" onClick={() => setDark(!dark)} title={dark ? "Switch to Light" : "Switch to Dark"}>
               {dark ? <><FaMoon className="toggle-icon" /><FaToggleOff /></> : <><FaSun className="toggle-icon" /><FaToggleOn /></>}
             </button>
-          </Nav>
+            <Navbar.Toggle aria-controls="main-nav" className="custom-toggler" />
+          </div>
+
+          <Navbar.Collapse id="main-nav">
+            <Nav className="ms-auto align-items-center gap-1 py-2 py-md-0">
+              {NAV.map((n) => (
+                <Nav.Link key={n} href={`#${n.toLowerCase()}`} className="nav-link-custom" onClick={() => setNavOpen(false)}>{n}</Nav.Link>
+              ))}
+              <button className="theme-toggle ms-2 d-none d-md-flex" onClick={() => setDark(!dark)} title={dark ? "Switch to Light" : "Switch to Dark"}>
+                {dark ? <><FaMoon className="toggle-icon" /><FaToggleOff /></> : <><FaSun className="toggle-icon" /><FaToggleOn /></>}
+              </button>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
 
       <div className="portfolio">
         <Hero />
         <div className="portfolio-content">
-          <Container fluid className="px-4">
+          <Container fluid className="px-3 px-md-4">
             <Experience />
             <Skills />
             <Projects />
@@ -60,7 +70,7 @@ export default function App() {
           </Container>
         </div>
         <footer className="footer">
-          <p>Crafted by Hemanth Kumar · All rights reserved</p>
+          <p>Crafted with ❤️ by Hemanth Kumar · {new Date().getFullYear()} · All rights reserved</p>
         </footer>
       </div>
     </PortfolioContext.Provider>

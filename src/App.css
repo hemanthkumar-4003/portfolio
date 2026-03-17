@@ -117,6 +117,25 @@ body {
   background: var(--primary-hover-bg);
 }
 
+/* ── Mobile Nav Collapse ── */
+.custom-toggler {
+  border: 1px solid var(--border) !important;
+  padding: 0.25rem 0.5rem;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  filter: invert(60%);
+}
+
+[data-theme="light"] .custom-toggler .navbar-toggler-icon {
+  filter: invert(20%);
+}
+
+.navbar-collapse .nav-link-custom {
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px;
+}
+
 /* ── Theme Toggle ── */
 .theme-toggle {
   display: flex;
@@ -212,7 +231,7 @@ body {
 }
 
 .hero-title {
-  font-size: 1rem;
+  font-size: clamp(0.75rem, 2vw, 1rem);
   color: var(--accent);
   font-weight: 500;
   letter-spacing: 1.5px;
@@ -509,8 +528,45 @@ body {
 }
 
 /* ── Responsive ── */
-@media (max-width: 768px) {
+
+/* Mobile (< 576px) */
+@media (max-width: 575px) {
   .portfolio { padding-top: 56px; }
-  .custom-navbar { padding: 0.5rem 0; }
-  .hero { padding: 3.5rem 1rem 2.5rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+  .hero-avatar { width: 64px; height: 64px; font-size: 1.4rem; }
+  .hero-title { font-size: 0.78rem; letter-spacing: 1px; }
+  .section { margin-bottom: 2rem; }
+  .section-title { font-size: 0.68rem; }
+  .custom-list li { font-size: 0.82rem; }
+  .skill-pill { font-size: 0.72rem; padding: 0.2rem 0.5rem; }
+  .marquee-item { min-width: 56px; }
+  .footer { font-size: 0.72rem; padding: 0.65rem 0.5rem; }
+  .portfolio-content { padding-bottom: 3.5rem; }
+}
+
+/* Tablet (576px – 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .portfolio { padding-top: 56px; }
+  .hero { padding: 3rem 1.5rem 2.5rem; }
+  .section { margin-bottom: 2.5rem; }
+}
+
+/* Tablet landscape / small desktop (768px – 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .portfolio { padding-top: 60px; }
+  .hero { padding: 4rem 2rem 3rem; }
+}
+
+/* Large desktop (≥ 1400px) */
+@media (min-width: 1400px) {
+  .hero { padding: 6rem 2rem 5rem; }
+  .hero-avatar { width: 96px; height: 96px; font-size: 2.2rem; }
+}
+
+/* Touch devices — disable hover transforms */
+@media (hover: none) {
+  .custom-card:hover { transform: none; }
+  .contact-links a:hover { transform: none; }
+  .marquee-item:hover { transform: none; }
+  .skill-pill:hover { background: var(--bg3); color: var(--text); border-color: var(--border); }
 }
