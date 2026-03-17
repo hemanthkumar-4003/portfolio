@@ -1,3 +1,4 @@
+import { Card, Badge } from "react-bootstrap";
 import { usePortfolio } from "../context/PortfolioContext";
 
 export default function Experience() {
@@ -8,15 +9,17 @@ export default function Experience() {
       <div className="timeline">
         {experience.map((job, i) => (
           <div key={i} className="timeline-item">
-            <div className="card">
-              <div className="card-header">
-                <strong>{job.company}</strong>
-                <span className="badge">{job.period}</span>
-              </div>
-              <ul>
-                {job.points.map((p, j) => <li key={j}>{p}</li>)}
-              </ul>
-            </div>
+            <Card className="custom-card">
+              <Card.Body>
+                <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                  <Card.Title className="mb-0 fw-semibold">{job.company}</Card.Title>
+                  <Badge className="custom-badge">{job.period}</Badge>
+                </div>
+                <ul className="custom-list">
+                  {job.points.map((p, j) => <li key={j}>{p}</li>)}
+                </ul>
+              </Card.Body>
+            </Card>
           </div>
         ))}
       </div>

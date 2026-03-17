@@ -1,5 +1,5 @@
-import { usePortfolio } from "../context/PortfolioContext";
-import { SKILL_ICONS } from "../context/PortfolioContext";
+import { Row, Col, Card } from "react-bootstrap";
+import { usePortfolio, SKILL_ICONS } from "../context/PortfolioContext";
 
 function getSkillMeta(skill) {
   return SKILL_ICONS[skill.toLowerCase().trim()] ?? SKILL_ICONS._fallback;
@@ -20,7 +20,7 @@ export default function Skills() {
     <section className="section" id="skills">
       <h3 className="section-title">Skills</h3>
 
-      <div className="skills-marquee-wrapper">
+      <div className="skills-marquee-wrapper mb-4">
         <div className="skills-marquee">
           {marqueeItems.map((s, i) => {
             const { icon: Icon, color } = getSkillMeta(s);
@@ -34,24 +34,28 @@ export default function Skills() {
         </div>
       </div>
 
-      <div className="skills-categories">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-3">
         {Object.entries(skills).map(([category, value]) => (
-          <div key={category} className="skill-category-card">
-            <p className="skill-category-label">{category}</p>
-            <div className="skill-pills">
-              {value.split(",").map((s) => {
-                const { icon: Icon, color } = getSkillMeta(s.trim());
-                return (
-                  <span key={s} className="skill-pill">
-                    <Icon size={14} color={color} />
-                    {s.trim()}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
+          <Col key={category}>
+            <Card className="custom-card h-100">
+              <Card.Body>
+                <p className="skill-category-label">{category}</p>
+                <div className="skill-pills">
+                  {value.split(",").map((s) => {
+                    const { icon: Icon, color } = getSkillMeta(s.trim());
+                    return (
+                      <span key={s} className="skill-pill">
+                        <Icon size={14} color={color} />
+                        {s.trim()}
+                      </span>
+                    );
+                  })}
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
+      </Row>
     </section>
   );
 }

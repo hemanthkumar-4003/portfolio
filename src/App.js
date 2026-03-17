@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import PortfolioContext, { portfolioData, NAV } from "./context/PortfolioContext";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
@@ -28,25 +29,38 @@ export default function App() {
 
   return (
     <PortfolioContext.Provider value={portfolioData}>
-      <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
-        <span className="navbar-name">{portfolioData.name}</span>
-        {NAV.map((n) => (
-          <a key={n} href={`#${n.toLowerCase()}`}>{n}</a>
-        ))}
-        <button className="theme-toggle" onClick={() => setDark(!dark)} title={dark ? "Switch to Light" : "Switch to Dark"}>
-          {dark ? <><FaMoon className="toggle-icon" /><FaToggleOff /></> : <><FaSun className="toggle-icon" /><FaToggleOn /></>}
-        </button>
-      </nav>
+      <Navbar className={`custom-navbar${scrolled ? " navbar--scrolled" : ""}`} fixed="top">
+        <Container fluid className="px-4">
+          <Navbar.Brand
+            className="navbar-name"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            style={{ cursor: "pointer" }}
+          >
+            {portfolioData.name}
+          </Navbar.Brand>
+          <Nav className="ms-auto align-items-center gap-1">
+            {NAV.map((n) => (
+              <Nav.Link key={n} href={`#${n.toLowerCase()}`} className="nav-link-custom">{n}</Nav.Link>
+            ))}
+            <button className="theme-toggle ms-2" onClick={() => setDark(!dark)} title={dark ? "Switch to Light" : "Switch to Dark"}>
+              {dark ? <><FaMoon className="toggle-icon" /><FaToggleOff /></> : <><FaSun className="toggle-icon" /><FaToggleOn /></>}
+            </button>
+          </Nav>
+        </Container>
+      </Navbar>
+
       <div className="portfolio">
         <Hero />
-        <main>
-          <Experience />
-          <Skills />
-          <Projects />
-          <Education />
-        </main>
+        <div className="portfolio-content">
+          <Container fluid className="px-4">
+            <Experience />
+            <Skills />
+            <Projects />
+            <Education />
+          </Container>
+        </div>
         <footer className="footer">
-          <p>Built with ReactJs · {new Date().getFullYear()}</p>
+          <p>Crafted by Hemanth Kumar · All rights reserved</p>
         </footer>
       </div>
     </PortfolioContext.Provider>
