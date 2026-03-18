@@ -20,42 +20,44 @@ export default function Skills() {
     <section className="section" id="skills">
       <h3 className="section-title">Skills</h3>
 
-      <div className="skills-marquee-wrapper mb-4">
-        <div className="skills-marquee">
-          {marqueeItems.map((s, i) => {
-            const { icon: Icon, color } = getSkillMeta(s);
-            return (
-              <div key={i} className="marquee-item">
-                <Icon size={36} color={color} />
-                <span>{s}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <Row xs={1} sm={2} md={3} lg={4} className="g-3">
-        {Object.entries(skills).map(([category, value]) => (
-          <Col key={category}>
-            <Card className="custom-card h-100">
-              <Card.Body>
-                <p className="skill-category-label">{category}</p>
-                <div className="skill-pills">
-                  {value.split(",").map((s) => {
-                    const { icon: Icon, color } = getSkillMeta(s.trim());
-                    return (
-                      <span key={s} className="skill-pill">
-                        <Icon size={14} color={color} />
-                        {s.trim()}
-                      </span>
-                    );
-                  })}
+      <div className="skills-layout">
+        <div className="skills-marquee-wrapper">
+          <div className="skills-marquee">
+            {marqueeItems.map((s, i) => {
+              const { icon: Icon, color } = getSkillMeta(s);
+              return (
+                <div key={i} className="marquee-item">
+                  <Icon size={36} color={color} />
+                  <span>{s}</span>
                 </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+              );
+            })}
+          </div>
+        </div>
+
+        <Row xs={1} sm={2} md={3} lg={4} className="g-3 flex-grow-1">
+          {Object.entries(skills).map(([category, value]) => (
+            <Col key={category}>
+              <Card className="custom-card h-100">
+                <Card.Body>
+                  <p className="skill-category-label">{category}</p>
+                  <div className="skill-pills">
+                    {value.split(",").map((s) => {
+                      const { icon: Icon, color } = getSkillMeta(s.trim());
+                      return (
+                        <span key={s} className="skill-pill">
+                          <Icon size={14} color={color} />
+                          {s.trim()}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </section>
   );
 }

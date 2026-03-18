@@ -387,49 +387,60 @@ body {
   box-shadow: 0 0 0 3px rgba(79,70,229,0.25);
 }
 
+/* ── Skills Layout ── */
+.skills-layout {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
 /* ── Skills Marquee ── */
 .skills-marquee-wrapper {
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  margin-bottom: 2rem;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg2);
-  padding: 1.2rem 0;
+  padding: 0 1rem;
+  width: 90px;
+  flex-shrink: 0;
+  height: 420px;
 }
 
 .skills-marquee {
   display: flex;
-  gap: 2rem;
-  width: max-content;
-  animation: marquee 28s linear infinite;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: max-content;
+  animation: marquee-vertical 28s linear infinite;
+  padding: 1rem 0;
 }
 
 .skills-marquee:hover { animation-play-state: paused; }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 
 .marquee-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  min-width: 72px;
+  gap: 0.4rem;
   cursor: default;
   transition: transform 0.2s;
 }
 
-.marquee-item:hover { transform: translateY(-4px); }
+.marquee-item:hover { transform: translateX(4px); }
 
 .marquee-item span {
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   color: var(--muted);
   white-space: nowrap;
   font-weight: 500;
+  text-align: center;
 }
 
 /* ── Skills Categories ── */
@@ -539,7 +550,8 @@ body {
   .section-title { font-size: 0.68rem; }
   .custom-list li { font-size: 0.82rem; }
   .skill-pill { font-size: 0.72rem; padding: 0.2rem 0.5rem; }
-  .marquee-item { min-width: 56px; }
+  .skills-marquee-wrapper { width: 70px; height: 320px; }
+  .marquee-item { transform: none; }
   .footer { font-size: 0.72rem; padding: 0.65rem 0.5rem; }
   .portfolio-content { padding-bottom: 3.5rem; }
 }
