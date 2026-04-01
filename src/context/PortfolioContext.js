@@ -38,11 +38,11 @@ export const SKILL_ICONS = {
 
 export const portfolioData = {
   name: "Hemanth Kumar Venkatreddy",
-  title: "Java Fullstack Developer",
+  title: "Java Backend Developer",
   contact: [
     { icon: FaPhone,    href: null,                                          title: "+91-9704612325" },
     { icon: FaEnvelope, href: "mailto:tech.hemanthkumar@gmail.com",          title: "tech.hemanthkumar@gmail.com" },
-    { icon: FaLinkedin, href: "https://www.linkedin.com/in/Hemanth-Kumar-Venkatreddy", title: "LinkedIn" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/hemanth-kumar-venkatreddy-523225189/", title: "LinkedIn" },
     { icon: FaGithub,   href: "https://github.com/hemanthkumar-4003",        title: "GitHub" },
   ],
   experience: [
